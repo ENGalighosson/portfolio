@@ -82,18 +82,12 @@ return [
             'replace_placeholders' => true,
         ],
 
-  'papertrail' => [
-    'driver' => 'monolog',
-    'level' => env('LOG_LEVEL', 'debug'),
-    'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class),
-    'handler_with' => [
-        'host' => env('PAPERTRAIL_URL', 'null'),
-        'port' => env('PAPERTRAIL_PORT', 'null'),
-        // REMOVE this line entirely:
-        // 'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
-    ],
-    'processors' => [PsrLogMessageProcessor::class],
-],
+   'papertrail' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'handler' => NullHandler::class,
+            'processors' => [PsrLogMessageProcessor::class],
+        ],
         'stderr' => [
             'driver' => 'monolog',
             'level' => env('LOG_LEVEL', 'debug'),
